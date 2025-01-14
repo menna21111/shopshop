@@ -40,7 +40,7 @@ class UserRepository {
         return right(Data.fromJson(response['data']));
       } else {
         return left(ServerFailure.fromResponse(200, response));
-      }
+      }//jjjwwwwwwwwwwwwwwwww
     } catch (e) {
       if (e is DioException) {
         log('fail user');
