@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shopshop/costant/colors.dart';
 
-import '../../../data/models/notficationmo/datum.dart';
+import '../../../home/data/models/notficationmo/datum.dart';
 
 class Notificationscrean extends StatelessWidget {
-  const Notificationscrean({super.key, required this.datumnot});
-  final List<Datumnot> datumnot;
+  const Notificationscrean({super.key,  this.datumnot});
+  final List<Datumnot> ?datumnot;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class Notificationscrean extends StatelessWidget {
         title: const Text('Notifications'),
       ),
       body: ListView.builder(
-        itemCount: datumnot.length, // number of items
+        itemCount: datumnot!.length, // number of items
         itemBuilder: (context, index) {
           return Container(
             margin: const EdgeInsets.all(10),
@@ -28,7 +28,7 @@ class Notificationscrean extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Text('${datumnot[index].message}'),
+            child: Text('${datumnot![index].message}'),
           );
         },
       ),

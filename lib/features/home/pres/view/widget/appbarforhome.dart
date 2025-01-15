@@ -6,15 +6,17 @@ import 'package:shopshop/costant/colors.dart';
 import 'package:shopshop/costant/size.dart';
 
 import '../../../../../core/utls/cach_helper.dart';
+import '../../../../notification/data/notificationrepo.dart';
 import '../../manager/notific/notificcubit.dart';
 import '../../manager/notific/notificstate.dart';
 import '../../manager/searchcubit.dart/searchcubit.dart';
 import '../screans/cartscrean.dart';
-import '../screans/notificationscrean.dart';
+import '../../../../notification/presination/view/notificationscrean.dart';
 import '../screans/search.dart';
 
 class Appbar extends StatelessWidget {
-  const Appbar({super.key});
+  const Appbar({super.key, });
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class Appbar extends StatelessWidget {
             )),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Padding(
@@ -51,6 +53,9 @@ class Appbar extends StatelessWidget {
                             width: 40,
                             child: IconButton(
                                 onPressed: () {
+                                  LocalNotificationService
+                                      .showBasicNotification(
+                                         1 , 'title', 'body');
                                   Navigator.push(context, MaterialPageRoute(
                                     builder: (context) {
                                       return Notificationscrean(
@@ -168,7 +173,8 @@ class Appbar extends StatelessWidget {
                   },
                   child: Container(
                       padding: EdgeInsets.all(4),
-                      height: Screan_size.hieght * 0.075,                      width: Screan_size.hieght * 0.06,
+                      height: Screan_size.hieght * 0.075,
+                      width: Screan_size.hieght * 0.06,
                       decoration: BoxDecoration(
                           color: Colors.white.withOpacity(.9),
                           borderRadius: BorderRadius.circular(6)),

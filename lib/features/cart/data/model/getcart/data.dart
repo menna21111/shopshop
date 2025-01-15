@@ -1,4 +1,4 @@
-import 'package:shopshop/features/home/data/models/getcart/cart_item.dart';
+import 'package:shopshop/features/cart/data/model/getcart/cart_item.dart';
 
 class Dataa {
   List<CartItem>? cartItems;

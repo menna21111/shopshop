@@ -59,14 +59,17 @@ class Productgridhome extends StatelessWidget {
                         SizedBox(
                           height: Screan_size.hieght * 0.18,
                           width: double.infinity,
-                          child: CachedNetworkImage(
-                            imageUrl: productsWithDiscounts[index].image ?? '',
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
-                            placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator(),
+                          child: Hero(
+                            tag: '${productsWithDiscounts[index].id}',
+                            child: CachedNetworkImage(
+                              imageUrl: productsWithDiscounts[index].image ?? '',
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              fit: BoxFit.fill,
                             ),
-                            fit: BoxFit.fill,
                           ),
                         ),
                         Padding(
