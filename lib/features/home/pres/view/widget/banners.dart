@@ -31,8 +31,8 @@ class _BannersState extends State<Banners> {
                 imagePath: state.bannermodel[1].image ?? 'assets/images.jpeg'),
             ImageContainerModel(
                 imagePath: state.bannermodel[2].image ?? 'assets/images.jpeg'),
-            ImageContainerModel(
-                imagePath: state.bannermodel[3].image ?? 'assets/images.jpeg'),
+            // ImageContainerModel(
+            //     imagePath: state.bannermodel[].image ?? 'assets/images.jpeg'),
           ];
           return Column(
             children: [

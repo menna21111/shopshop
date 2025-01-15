@@ -36,14 +36,18 @@ class Productdetails extends StatelessWidget {
                             bottomRight: Radius.circular(15),
                           ),
                         ),
-                        child: CachedNetworkImage(
-                          imageUrl: productmodel.image ?? '',
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                          placeholder: (context, url) => const Center(
-                            child: CircularProgressIndicator(),
+                        child: Hero(
+                          
+                          tag: productmodel.id.toString(),
+                          child: CachedNetworkImage(
+                            imageUrl: productmodel.image ?? '',
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                            placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            fit: BoxFit.fill,
                           ),
-                          fit: BoxFit.fill,
                         ),
                       ),
                       Positioned(

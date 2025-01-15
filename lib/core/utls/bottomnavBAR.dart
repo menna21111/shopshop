@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopshop/costant/colors.dart';
@@ -6,6 +8,8 @@ import 'package:shopshop/features/home/pres/view/screans/favscrean.dart';
 import 'package:shopshop/features/home/pres/view/screans/orderscrean.dart';
 
 import '../../features/home/pres/view/homeviewbody.dart';
+import '../../features/notification/data/notificationrepo.dart';
+import '../../features/notification/presination/view/notificationscrean.dart';
 import '../../features/registratian/pres/cubit/usercubit.dart';
 import '../../features/registratian/pres/screens/screens/profile_screan.dart';
 
@@ -27,20 +31,25 @@ class _BottomNavigationExampleState extends State<BottomNavigation> {
     super.initState();
     BlocProvider.of<UserCubit>(context).getuser();
     _initializePagesAndIcons();
+
   }
+
+  int notificationId = 1;
+
+ 
 
   void _initializePagesAndIcons() {
     _pages = [
       const ProfileScrean(),
-      const Homeviewbody(),const Orderscrean(),
+      const Homeviewbody(),
+      const Orderscrean(),
       const Favscrean(),
-      
     ];
     _listOfIcons = [
       Icons.person_4_outlined,
-      Icons.home_outlined, Icons.archive_rounded,
+      Icons.home_outlined,
+      Icons.archive_rounded,
       Icons.favorite_border_outlined,
-     
     ];
   }
 

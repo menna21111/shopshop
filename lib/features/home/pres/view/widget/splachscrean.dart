@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopshop/costant/colors.dart';
@@ -5,6 +8,8 @@ import 'package:shopshop/features/onboarding/onboardingscrean.dart';
 import 'package:shopshop/features/registratian/pres/screens/screens/loginscrean.dart';
 import '../../../../../core/utls/bottomnavBAR.dart';
 import '../../../../../core/utls/cach_helper.dart';
+import '../../../../notification/data/notificationrepo.dart';
+import '../../../../notification/presination/view/notificationscrean.dart';
 
 class Splachscrean extends StatefulWidget {
   const Splachscrean({super.key});
@@ -18,10 +23,15 @@ class _SplachscreanState extends State<Splachscrean> {
   void initState() {
     super.initState();
     _navigateAfterDelay();
+  
   }
 
+
+
+
+
   Future<void> _navigateAfterDelay() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 5));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
 
@@ -53,15 +63,23 @@ class _SplachscreanState extends State<Splachscrean> {
             end: Alignment.bottomRight,
           ),
         ),
-        child: const Center(
-          child: Text(
+        child:  Center(
+      child:     AnimatedTextKit(animatedTexts: [
+         TypewriterAnimatedText(
             'shopshop',
-            style: TextStyle(
+            textStyle: const TextStyle(
               color: Colors.white,
               fontSize: 44,
               fontWeight: FontWeight.bold,
-            ),
-          ),
+            )
+            ,speed: const Duration(milliseconds: 100),
+           
+      
+          ) ],
+           totalRepeatCount: 2, 
+           pause:const Duration(milliseconds: 500), displayFullTextOnTap: false, 
+          stopPauseOnTap: true,)
+        ,
         ),
       ),
     );

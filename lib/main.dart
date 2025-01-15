@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +11,7 @@ import 'package:shopshop/features/home/data/repo/home_repo.dart';
 import 'package:shopshop/features/home/pres/manager/addorder/addordercubit.dart';
 import 'package:shopshop/features/home/pres/manager/getorder/getordercubit.dart';
 import 'package:shopshop/features/home/pres/manager/searchcubit.dart/searchcubit.dart';
+import 'package:shopshop/firebase_options.dart';
 
 import 'core/utls/apiservice.dart';
 import 'features/home/pres/manager/BANNERCUBIT/bannercubit.dart';
@@ -23,6 +27,7 @@ import 'features/home/pres/manager/notific/notificcubit.dart';
 import 'features/home/pres/manager/orderdetails.dart/orderdetailcubit.dart';
 import 'features/home/pres/manager/productcubit.dart/productcubit.dart';
 import 'features/home/pres/manager/updatecart/updatecubite.dart';
+import 'features/notification/data/notificationrepo.dart';
 import 'features/registratian/data/repo.dart';
 import 'features/registratian/pres/cubit/usercubit.dart';
 import 'features/registratian/pres/screens/screens/firstscreen.dart';
@@ -30,8 +35,20 @@ import 'package:geolocator/geolocator.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheHelper().init();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
+ 
+  await CacheHelper().init(); 
+  await Future.wait([//run in parallel but should.nt  one debend on other
+      NotificationService.init().then((value) {
+        log('tokenyyy: $value');
+        Notificationrepo().sendnotications(value!);
+      }),
+  LocalNotificationService.initialize()
+  ]);
   Dio dio = Dio();
   if (!kReleaseMode) {
     dio?.interceptors.add(PrettyDioLogger(
